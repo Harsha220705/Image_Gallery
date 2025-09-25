@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig'; // Corrected Path
-import './Header.css';
+import './header.css';
 
 // 1. Accept 'user' as a prop
 function Header({ user }) {
