@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 // 1. Change this line: Import getAuth instead of getAnalytics
 import { getAuth } from "firebase/auth"; 
+import { getFirestore } from "firebase/firestore";
 
 // Your web app's Firebase configuration (this part is correct)
 const firebaseConfig = {
@@ -19,3 +20,4 @@ const app = initializeApp(firebaseConfig);
 
 // 2. Change this line: Initialize and EXPORT auth
 export const auth = getAuth(app);
+export const db = getFirestore(app);

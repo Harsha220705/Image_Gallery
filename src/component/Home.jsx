@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <div className="hero-section text-center text-white">
             <Container>
-                <h1 className="display-3 fw-bold">Your Photo Gallery</h1>
+                <h1 className="display-3 fw-bold">Image Gallery</h1>
                 <p className="lead fs-4 mb-5">
                     Store, view, and manage your precious memories.
                 </p>

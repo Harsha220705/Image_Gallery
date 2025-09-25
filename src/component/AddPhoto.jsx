@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./style.css"; // Or AuthForm.css if you're using that
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
 
 const AddPhoto = ({ onAddPhoto }) => {
   const [title, setTitle] = useState('');
@@ -22,7 +23,10 @@ const AddPhoto = ({ onAddPhoto }) => {
 
     try {
       // Step 1: Upload image to your backend to get a Cloudinary URL
-      const uploadResponse = await fetch('http://localhost:5001/api/upload', {
+      const uploadUrl = `${BACKEND_URL}/api/upload`;
+      console.log("Attempting to upload to:", uploadUrl);
+      console.log("Sending this form data:", formData);
+      const uploadResponse = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,
       });

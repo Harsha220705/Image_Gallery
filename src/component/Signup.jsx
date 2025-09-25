@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig.js"; // Corrected Path
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "../firebaseConfig.js"; // Corrected Path
+import { doc, setDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import './AuthForm.css'; // Import the new CSS
@@ -10,6 +11,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const navigate = useNavigate();
 
   const handleSignup = async (e) => {
@@ -23,7 +25,17 @@ function Signup() {
       return;
     }
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      if (displayName) {
+        await updateProfile(cred.user, { displayName });
+      }
+      // store minimal profile for About page
+      await setDoc(doc(db, 'profiles', cred.user.uid), {
+        displayName: displayName || '',
+        aboutDescription: '',
+        photoUrl: '',
+        updatedAt: Date.now()
+      });
       navigate('/gallery');
     } catch (error) {
       alert(error.message);
@@ -37,7 +49,16 @@ function Signup() {
           <h2>SIGN UP</h2>
           <p>IMAGE BOX</p>
           <form onSubmit={handleSignup}>
-            {/* Name field removed for simple email/password signup */}
+            <div className="auth-input-group">
+              <span className="icon"><FontAwesomeIcon icon={faUser} /></span>
+              <input 
+                type="text" 
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                placeholder="Your Name" 
+                required 
+              />
+            </div>
             <div className="auth-input-group">
               <span className="icon"><FontAwesomeIcon icon={faUser} /></span>
               <input 

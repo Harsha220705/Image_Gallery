@@ -24,14 +24,14 @@ function Header({ user }) {
         <nav className="main-nav">
           <Link to="/">Home</Link>
           <Link to="/gallery">Gallery</Link>
-          <Link to="/about">About</Link>
+          {/* <Link to="/about">About</Link> */}
         </nav>
       </div>
       <div className="header-right">
         {/* 2. Conditional Rendering */}
         {user ? (
           <>
-            <span className="user-email">{user.email}</span>
+            <span className="user-email">{user.displayName || user.email}</span>
             <Link to="/addphoto" className="nav-link">Add Photo</Link>
             <button onClick={handleLogout} className="nav-button">Logout</button>
           </>
