@@ -1,0 +1,106 @@
+.auth-page-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 100px); /* Adjust based on header/footer */
+    background-color: #f0f2f5;
+    padding: 2rem;
+  }
+  
+  .auth-card {
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .auth-form-section {
+    padding: 40px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .auth-form-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #010a13;
+  }
+  
+  .auth-form-section p {
+    color: #010a13;
+    margin-bottom: 30px;
+    font-size: 30px;
+    background-color: #5a49c7;
+    font-weight: 900;
+  }
+  
+  .auth-input-group {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .auth-input-group input {
+    width: 100%;
+    padding: 12px 12px 12px 40px; /* Space for icon */
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .auth-input-group .icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #adb5bd;
+  }
+  
+  .login-now-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #6d5dfc;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .login-now-btn:hover {
+    background-color: #5b4ddb;
+  }
+  
+  /* Image Section */
+  .auth-image-section {
+    width: 50%;
+    background: linear-gradient(135deg, #8e7dff, #6d5dfc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .auth-image-section img {
+    max-width: 80%;
+    border-radius: 15px;
+    z-index: 2;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  }
+  
+  .glass-effect {
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      z-index: 1;
+  }

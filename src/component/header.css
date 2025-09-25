@@ -1,0 +1,68 @@
+/* Main header container */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #1a242f; /* Dark background similar to Prime Video */
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Left side container (Logo + Main Nav) */
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Logo styling */
+  .logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-right: 40px;
+  }
+  
+  /* Main navigation links container */
+  .main-nav {
+    display: flex;
+    gap: 25px;
+  }
+  
+  /* Styling for all links inside the header */
+  .main-nav a,
+  .nav-link {
+    color: #d1d1d1;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .main-nav a:hover,
+  .nav-link:hover {
+    color: white;
+  }
+  
+  /* Right side container (Login/Signup) */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Special styling for the "Sign Up" button */
+  .nav-button {
+    background-color: #007bff; /* A nice blue color */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .nav-button:hover {
+    background-color: #0056b3;
+  }

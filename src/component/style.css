@@ -1,0 +1,215 @@
+/* Global Styles */
+h2 {
+    font-family: 'Courier New', Courier, monospace;
+    color: lightcoral;
+    font-weight: 600;
+    text-align: center;
+    justify-content: space-between;
+}
+
+p {
+    text-align: center;
+    color: rgb(2, 19, 2);
+    border: 2px solid rgb(0, 0, 3);
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    
+    
+}
+.photo-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.photo-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+}
+.hero-section {
+  /* Core styles for the full-screen effect */
+  min-height: calc(100vh - 70px); /* Full screen height minus the header's height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Background image and styling */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center;
+  background-size: cover;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+.mainclass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 50px;
+    box-shadow: rgba(193, 193, 209, 0.2) 0px 7px 29px 0px, 0px 10px 15px -3px rgba(0,0,0,0.1);
+}
+
+.headerclass {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    text-decoration: none;
+}
+
+/* About Component Styles */
+.about-container {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  border-radius: 10px;
+  padding: 30px;
+  background-color: white;
+}
+
+.about-row {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.about-image {
+  width: 300px;
+  height: 250px;
+}
+
+/* Home Component Button Styles */
+.btn-add-photo {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-add-photo:hover {
+  background-color: #218838;
+}
+
+.btn-view-photo {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-view-photo:hover {
+  background-color: #0056b3;
+}
+
+.btn-delete-photo {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.btn-delete-photo:hover {
+  background-color: #c82333;
+}
+
+.container.my-5 {
+  box-shadow: rgba(226, 209, 209, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100%;
+  border-radius: 10px;
+  background-color: rgb(212, 178, 178);
+}
+
+.form-control {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control:focus {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.my-5 {
+  width: 100%;
+  max-width: 600px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 40px auto;
+  padding: 20px;
+  /* border-radius: 10px; */
+  background-color: rgb(157, 58, 58);
+}
+/* Add this to your style.css */
+.form-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box; /* Important for padding to not affect width */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+/* Add this to your style.css */
+.content-area {
+  padding: 2rem; /* Adds space on all sides within the main content block */
+}
+.hero-section {
+  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center;
+  background-size: cover;
+  padding: 100px 0;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}

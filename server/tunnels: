@@ -1,0 +1,4 @@
+tunnels:
+  my-server:
+    addr: 5001
+    proto: http
