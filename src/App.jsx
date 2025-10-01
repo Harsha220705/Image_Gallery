@@ -28,68 +28,78 @@ function App() {
 
   // --- Effects ---
 
-  // Effect to listen for changes in Firebase authentication state
+  // This effect runs once when the app starts and sets up a listener for authentication changes
+  // It automatically detects when a user logs in or out and updates our app state accordingly
+  // This means users stay logged in even if they refresh the page or close the browser
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setIsAuthLoading(false); // Auth check is complete
+      setUser(currentUser); // currentUser will be null if no one is logged in, or contain user info if someone is logged in
+      setIsAuthLoading(false); // We're done checking if someone is logged in
     });
-    // Cleanup the listener when the component unmounts
+    // Cleanup the listener when the component unmounts to prevent memory leaks
     return () => unsubscribe();
   }, []);
 
-  // Effect to fetch photos from the backend whenever the user logs in or out
+  // This effect automatically loads the user's photos when they log in and clears them when they log out
+  // It runs every time the 'user' state changes (login, logout, or page refresh)
   useEffect(() => {
-    if (user) { // Only fetch photos if a user is logged in
-      setIsLoading(true);
+    if (user) { // Only try to fetch photos if someone is actually logged in
+      setIsLoading(true); // Show loading spinner while we get the photos
       const fetchPhotos = async () => {
         try {
+          // Ask our backend server to get all photos that belong to this specific user
           const response = await fetch(`${BACKEND_URL}/api/photos/${user.uid}`);
           if (!response.ok) throw new Error('Failed to fetch photos.');
           const photosData = await response.json();
-          setPhotos(photosData);
+          setPhotos(photosData); // Store the photos in our app state so we can display them
         } catch (error) {
           console.error('Error fetching photos:', error);
         } finally {
-          setIsLoading(false);
+          setIsLoading(false); // Hide loading spinner whether we succeeded or failed
         }
       };
       fetchPhotos();
     } else {
-      setPhotos([]); // Clear photos when the user logs out
+      setPhotos([]); // When user logs out, clear all photos from the screen
     }
   }, [user]); // This effect re-runs whenever the 'user' state changes
 
   // --- Data Handling Functions ---
 
-  // Function to add a new photo
+  // This function saves a new photo to the database and immediately shows it in the gallery
+  // It's called when a user uploads a photo through the AddPhoto form
   const handleAddPhoto = async (newPhotoData) => {
-    if (!user) return; // Guard clause
+    if (!user) return; // Safety check - don't try to save photos if no one is logged in
     
-    // Add the user's ID to the photo data before sending to the backend
+    // Add the current user's ID to the photo data so we know who owns this photo
     const photoToSend = { ...newPhotoData, userId: user.uid };
 
     try {
+      // Send the photo data to our backend server to save it in the database
       const response = await fetch(`${BACKEND_URL}/api/photos`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(photoToSend),
       });
       const savedPhoto = await response.json();
-      // Add the new photo to the top of the list in the UI for immediate feedback
+      // Immediately add the new photo to the top of our photo list so the user sees it right away
+      // This gives instant feedback instead of making them wait for a page refresh
       setPhotos(prevPhotos => [savedPhoto, ...prevPhotos]);
     } catch (error) {
       console.error('Error adding photo:', error);
     }
   };
 
-  // Function to delete a photo
+  // This function permanently deletes a photo from the database and removes it from the gallery
+  // It's called when a user clicks the delete button on a photo
   const handleDeletePhoto = async (photoIdToDelete) => {
     try {
+      // Tell our backend server to delete this specific photo from the database
       await fetch(`${BACKEND_URL}/api/photos/${photoIdToDelete}`, {
         method: 'DELETE',
       });
-      // Update the UI by removing the deleted photo from the state
+      // Immediately remove the photo from our photo list so it disappears from the screen
+      // This gives instant feedback instead of making the user wait for a page refresh
       setPhotos(prevPhotos => prevPhotos.filter(photo => photo.id !== photoIdToDelete));
     } catch (error) {
       console.error('Error deleting photo:', error);

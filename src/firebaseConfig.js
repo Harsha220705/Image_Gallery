@@ -1,10 +1,11 @@
-// Import the functions you need from the SDKs you need
+
 import { initializeApp } from "firebase/app";
-// 1. Change this line: Import getAuth instead of getAnalytics
+
 import { getAuth } from "firebase/auth"; 
 import { getFirestore } from "firebase/firestore";
 
-// Your web app's Firebase configuration (this part is correct)
+// Firebase project configuration - contains all the connection details needed to connect to our Firebase project
+// This tells Firebase which project to connect to and provides authentication keys
 const firebaseConfig = {
   apiKey: "AIzaSyBErvKqhQlYubRN4Oh5SeoVR1L1lAJKOgs",
   authDomain: "image-gallery-b410c.firebaseapp.com",
@@ -15,9 +16,14 @@ const firebaseConfig = {
   measurementId: "G-EMH8EEMMM6"
 };
 
-// Initialize Firebase
+// Creates the main Firebase app instance using our configuration
+// This is like connecting to Firebase with our project credentials
 const app = initializeApp(firebaseConfig);
 
-// 2. Change this line: Initialize and EXPORT auth
+// Creates and exports the authentication service - handles user login, signup, logout
+// This is what we use to manage user accounts and check if someone is logged in
 export const auth = getAuth(app);
+
+// Creates and exports the Firestore database service - handles storing and retrieving data
+// This is what we use to save photos, user data, and other information to the cloud database
 export const db = getFirestore(app);

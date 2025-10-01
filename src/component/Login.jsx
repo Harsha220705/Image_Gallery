@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebaseConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import './AuthForm.css'; // Import the new CSS
+import './AuthForm.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -61,6 +61,3 @@ function Login() {
 }
 
 export default Login;
-
-// Note: You'll need to install font-awesome
-// npm install @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome

@@ -10,11 +10,15 @@ function Gallery({ photos, onDeletePhoto, isLoading }) {
   const [query, setQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  // Opens the lightbox (full-screen photo viewer) and shows the photo at the specified index
+  // This is called when a user clicks on any photo thumbnail to view it larger
   const openLightbox = (photoIndex) => {
-    setIndex(photoIndex);
-    setOpen(true);
+    setIndex(photoIndex); // Tell the lightbox which photo to show
+    setOpen(true); // Make the lightbox visible
   };
 
+  // Converts different date formats from the database into a JavaScript Date object
+  // Handles both Firestore timestamps and regular date strings
   const toDate = (createdAt) => {
     if (!createdAt) return null;
     // Firestore Timestamp from backend may appear as {_seconds, _nanoseconds}
@@ -52,6 +56,8 @@ function Gallery({ photos, onDeletePhoto, isLoading }) {
       .slice(0, 6);
   }, [photos, query]);
 
+  // Groups photos by month and year for better organization
+  // Creates section headers like 'January 2024', 'February 2024', etc.
   const groupedByMonth = useMemo(() => {
     const map = new Map();
     filteredPhotos.forEach((p, i) => {
@@ -70,9 +76,11 @@ function Gallery({ photos, onDeletePhoto, isLoading }) {
     return entries;
   }, [filteredPhotos]);
 
+  // When user clicks on a search suggestion, fill in the search box and open that photo
+  // This makes searching more user-friendly by showing matching photo titles
   const handleSelectSuggestion = (title) => {
-    setQuery(title);
-    setShowSuggestions(false);
+    setQuery(title); // Put the selected title in the search box
+    setShowSuggestions(false); // Hide the suggestions dropdown
     // Open first matching photo in lightbox
     const idx = filteredPhotos.findIndex(p => p.title === title);
     if (idx >= 0) openLightbox(idx);
@@ -120,7 +128,17 @@ function Gallery({ photos, onDeletePhoto, isLoading }) {
                   />
                   <Card.Body className="d-flex flex-column">
                     <Card.Title>{photo.title}</Card.Title>
-                    <Card.Text>{photo.description}</Card.Text>
+                  <Card.Text>{photo.description}</Card.Text>
+                  <Card.Text className="text-muted" style={{ fontSize: '0.9rem' }}>
+                    {(() => {
+                      const d = toDate(photo.createdAt);
+                      const timeStr = d ? new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(d) : 'Unknown time';
+                      const locStr = photo.location && photo.location.lat && photo.location.lng
+                        ? `${photo.location.lat.toFixed(5)}, ${photo.location.lng.toFixed(5)}`
+                        : 'Unknown location';
+                      return `${timeStr} • ${locStr}`;
+                    })()}
+                  </Card.Text>
                     <Button 
                       variant="danger" 
                       size="sm" 

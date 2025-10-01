@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../firebaseConfig.js"; // Corrected Path
+import { auth, db } from "../firebaseConfig.js";
 import { doc, setDoc } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import './AuthForm.css'; // Import the new CSS
+import './AuthForm.css';
 
 function Signup() {
   const [email, setEmail] = useState('');
@@ -16,27 +16,33 @@ function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
+    
     if (password.length < 6) {
       alert("Password must be at least 6 characters long.");
       return;
     }
+    
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
+      
       if (displayName) {
         await updateProfile(cred.user, { displayName });
       }
-      // store minimal profile for About page
+      
       await setDoc(doc(db, 'profiles', cred.user.uid), {
         displayName: displayName || '',
         aboutDescription: '',
         photoUrl: '',
         updatedAt: Date.now()
       });
+      
       navigate('/gallery');
+      
     } catch (error) {
       alert(error.message);
     }
@@ -94,7 +100,6 @@ function Signup() {
         </div>
         <div className="auth-image-section">
           <div className="glass-effect"></div>
-          {/* Using a slightly different image for variety */}
           <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Person working on a laptop" />
         </div>
       </div>
